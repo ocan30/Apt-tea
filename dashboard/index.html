@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Apt Tea Dashboard</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="app">
+        <!-- Sidebar -->
+        <aside class="sidebar" id="sidebar">
+            <div class="sidebar-header">
+                <span class="logo">&#9749;</span>
+                <h1 class="brand">Apt Tea</h1>
+            </div>
+            <nav class="nav">
+                <a href="#" class="nav-item active" data-page="dashboard">
+                    <span class="nav-icon">&#9632;</span>
+                    <span class="nav-text">Dashboard</span>
+                </a>
+                <a href="#" class="nav-item" data-page="analytics">
+                    <span class="nav-icon">&#9650;</span>
+                    <span class="nav-text">Analytics</span>
+                </a>
+                <a href="#" class="nav-item" data-page="products">
+                    <span class="nav-icon">&#9733;</span>
+                    <span class="nav-text">Products</span>
+                </a>
+                <a href="#" class="nav-item" data-page="orders">
+                    <span class="nav-icon">&#9744;</span>
+                    <span class="nav-text">Orders</span>
+                </a>
+                <a href="#" class="nav-item" data-page="customers">
+                    <span class="nav-icon">&#9786;</span>
+                    <span class="nav-text">Customers</span>
+                </a>
+                <a href="#" class="nav-item" data-page="settings">
+                    <span class="nav-icon">&#9881;</span>
+                    <span class="nav-text">Settings</span>
+                </a>
+            </nav>
+            <div class="sidebar-footer">
+                <div class="user-info">
+                    <div class="avatar">AT</div>
+                    <div class="user-details">
+                        <span class="user-name">Admin</span>
+                        <span class="user-role">Manager</span>
+                    </div>
+                </div>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main">
+            <!-- Header -->
+            <header class="header">
+                <div class="header-left">
+                    <button class="menu-toggle" id="menuToggle">&#9776;</button>
+                    <h2 class="page-title" id="pageTitle">Dashboard</h2>
+                </div>
+                <div class="header-right">
+                    <div class="search-box">
+                        <input type="text" placeholder="Search..." class="search-input">
+                    </div>
+                    <button class="theme-toggle" id="themeToggle" title="Toggle Dark/Light Mode">
+                        <span class="theme-icon" id="themeIcon">&#9790;</span>
+                    </button>
+                    <button class="notification-btn">
+                        <span>&#9993;</span>
+                        <span class="badge">3</span>
+                    </button>
+                </div>
+            </header>
+
+            <!-- Dashboard Content -->
+            <div class="content" id="content">
+                <!-- Stat Cards -->
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <div class="stat-icon revenue">&#36;</div>
+                        <div class="stat-info">
+                            <span class="stat-label">Total Revenue</span>
+                            <span class="stat-value">$48,256</span>
+                            <span class="stat-change positive">+12.5%</span>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon orders">&#9744;</div>
+                        <div class="stat-info">
+                            <span class="stat-label">Total Orders</span>
+                            <span class="stat-value">1,245</span>
+                            <span class="stat-change positive">+8.2%</span>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon customers">&#9786;</div>
+                        <div class="stat-info">
+                            <span class="stat-label">Customers</span>
+                            <span class="stat-value">3,847</span>
+                            <span class="stat-change positive">+5.1%</span>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon products">&#9749;</div>
+                        <div class="stat-info">
+                            <span class="stat-label">Products</span>
+                            <span class="stat-value">86</span>
+                            <span class="stat-change negative">-2.3%</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Charts Section -->
+                <div class="charts-grid">
+                    <div class="chart-card">
+                        <div class="chart-header">
+                            <h3>Revenue Overview</h3>
+                            <select class="chart-filter">
+                                <option>Last 7 days</option>
+                                <option>Last 30 days</option>
+                                <option>Last 90 days</option>
+                            </select>
+                        </div>
+                        <div class="chart-body">
+                            <svg class="bar-chart" id="revenueChart" viewBox="0 0 600 200"></svg>
+                        </div>
+                    </div>
+                    <div class="chart-card">
+                        <div class="chart-header">
+                            <h3>Sales by Category</h3>
+                        </div>
+                        <div class="chart-body donut-container">
+                            <svg class="donut-chart" id="categoryChart" viewBox="0 0 200 200"></svg>
+                            <div class="donut-legend" id="donutLegend"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Table Section -->
+                <div class="table-card">
+                    <div class="table-header">
+                        <h3>Recent Orders</h3>
+                        <button class="btn btn-primary">View All</button>
+                    </div>
+                    <div class="table-wrapper">
+                        <table class="data-table">
+                            <thead>
+                                <tr>
+                                    <th>Order ID</th>
+                                    <th>Customer</th>
+                                    <th>Product</th>
+                                    <th>Amount</th>
+                                    <th>Status</th>
+                                    <th>Date</th>
+                                </tr>
+                            </thead>
+                            <tbody id="ordersTable">
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>
