@@ -1,0 +1,14 @@
+{
+  "name": "apt-tea-circle-setup",
+  "version": "1.0.0",
+  "description": "Circle Developer-Controlled Wallets setup scripts for Apt-tea dashboard",
+  "private": true,
+  "scripts": {
+    "generate-secret": "node generate-entity-secret.js",
+    "generate-ciphertext": "node generate-ciphertext.js"
+  },
+  "dependencies": {
+    "@circle-fin/developer-controlled-wallets": "^7.0.0",
+    "dotenv": "^16.3.1"
+  }
+}
