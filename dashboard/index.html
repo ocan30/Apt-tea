@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Apt Tea — USDC Wallet Dashboard</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="app">
+        <!-- Sidebar -->
+        <aside class="sidebar" id="sidebar">
+            <div class="sidebar-header">
+                <span class="logo">&#9749;</span>
+                <h1 class="brand">Apt Tea</h1>
+            </div>
+            <nav class="nav">
+                <a href="#" class="nav-item active" data-page="overview">
+                    <span class="nav-icon">&#9632;</span>
+                    <span class="nav-text">Overview</span>
+                </a>
+                <a href="#" class="nav-item" data-page="wallets">
+                    <span class="nav-icon">&#9785;</span>
+                    <span class="nav-text">Wallets</span>
+                </a>
+                <a href="#" class="nav-item" data-page="transfer">
+                    <span class="nav-icon">&#10140;</span>
+                    <span class="nav-text">Transfer</span>
+                </a>
+                <a href="#" class="nav-item" data-page="transactions">
+                    <span class="nav-icon">&#9744;</span>
+                    <span class="nav-text">Transactions</span>
+                </a>
+                <a href="#" class="nav-item" data-page="settings">
+                    <span class="nav-icon">&#9881;</span>
+                    <span class="nav-text">Settings</span>
+                </a>
+            </nav>
+            <div class="sidebar-footer">
+                <div class="user-info">
+                    <div class="avatar">AT</div>
+                    <div class="user-details">
+                        <span class="user-name" id="backendStatusLabel">Backend</span>
+                        <span class="user-role" id="backendStatus">checking...</span>
+                    </div>
+                </div>
+            </div>
+        </aside>
+
+        <!-- Main -->
+        <main class="main">
+            <header class="header">
+                <div class="header-left">
+                    <button class="menu-toggle" id="menuToggle">&#9776;</button>
+                    <h2 class="page-title" id="pageTitle">Overview</h2>
+                </div>
+                <div class="header-right">
+                    <span class="badge-chip" id="chainBadge">MATIC-AMOY</span>
+                    <button class="theme-toggle" id="themeToggle" title="Toggle theme">
+                        <span class="theme-icon" id="themeIcon">&#9790;</span>
+                    </button>
+                </div>
+            </header>
+
+            <div class="content">
+                <!-- OVERVIEW PAGE -->
+                <section class="page active" data-page="overview">
+                    <div class="stats-grid">
+                        <div class="stat-card">
+                            <div class="stat-icon revenue">$</div>
+                            <div class="stat-info">
+                                <span class="stat-label">Total USDC</span>
+                                <span class="stat-value" id="totalUsdc">0.00</span>
+                                <span class="stat-change positive">Testnet</span>
+                            </div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-icon orders">&#9785;</div>
+                            <div class="stat-info">
+                                <span class="stat-label">Wallets</span>
+                                <span class="stat-value" id="walletCount">0</span>
+                                <span class="stat-change positive">Active</span>
+                            </div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-icon customers">&#9744;</div>
+                            <div class="stat-info">
+                                <span class="stat-label">Wallet Sets</span>
+                                <span class="stat-value" id="walletSetCount">0</span>
+                                <span class="stat-change positive">Groups</span>
+                            </div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-icon products">&#9749;</div>
+                            <div class="stat-info">
+                                <span class="stat-label">Network</span>
+                                <span class="stat-value" id="networkName">Amoy</span>
+                                <span class="stat-change positive">Polygon Testnet</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="charts-grid">
+                        <div class="chart-card">
+                            <div class="chart-header">
+                                <h3>Quick Start</h3>
+                            </div>
+                            <div class="chart-body quickstart">
+                                <ol class="quickstart-list">
+                                    <li>Go to <strong>Wallets</strong> page and create your first wallet set + wallet</li>
+                                    <li>Copy the wallet address, request testnet USDC from <a href="https://faucet.circle.com" target="_blank" rel="noopener">faucet.circle.com</a></li>
+                                    <li>Come back, refresh balance, and try a <strong>Transfer</strong></li>
+                                </ol>
+                            </div>
+                        </div>
+                        <div class="chart-card">
+                            <div class="chart-header">
+                                <h3>Backend Health</h3>
+                            </div>
+                            <div class="chart-body">
+                                <div class="health-block">
+                                    <div class="health-row"><span>Status</span><strong id="healthStatus">—</strong></div>
+                                    <div class="health-row"><span>Chain</span><strong id="healthChain">—</strong></div>
+                                    <div class="health-row"><span>Account Type</span><strong id="healthAccount">—</strong></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- WALLETS PAGE -->
+                <section class="page" data-page="wallets">
+                    <div class="table-card">
+                        <div class="table-header">
+                            <h3>Wallet Sets</h3>
+                            <button class="btn btn-primary" id="btnCreateSet">+ New Wallet Set</button>
+                        </div>
+                        <div class="table-wrapper">
+                            <table class="data-table">
+                                <thead>
+                                    <tr>
+                                        <th>Name</th>
+                                        <th>ID</th>
+                                        <th>Created</th>
+                                        <th>Action</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="walletSetsTable">
+                                    <tr><td colspan="4" class="empty">Loading...</td></tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                    <div class="table-card" style="margin-top:24px;">
+                        <div class="table-header">
+                            <h3>Wallets</h3>
+                            <button class="btn btn-primary" id="btnCreateWallet">+ New Wallet</button>
+                        </div>
+                        <div class="table-wrapper">
+                            <table class="data-table">
+                                <thead>
+                                    <tr>
+                                        <th>Address</th>
+                                        <th>Chain</th>
+                                        <th>Type</th>
+                                        <th>Balance</th>
+                                        <th>Action</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="walletsTable">
+                                    <tr><td colspan="5" class="empty">No wallets yet. Create one above.</td></tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- TRANSFER PAGE -->
+                <section class="page" data-page="transfer">
+                    <div class="chart-card" style="max-width:600px;">
+                        <div class="chart-header">
+                            <h3>Send USDC</h3>
+                        </div>
+                        <div class="chart-body form-body">
+                            <label>Source Wallet
+                                <select id="transferWallet"></select>
+                            </label>
+                            <label>Destination Address
+                                <input type="text" id="transferDest" placeholder="0x..."/>
+                            </label>
+                            <label>Amount (USDC)
+                                <input type="number" id="transferAmount" step="0.01" placeholder="0.10"/>
+                            </label>
+                            <label>Token Address (optional)
+                                <input type="text" id="transferTokenAddr" placeholder="leave empty to use native"/>
+                            </label>
+                            <button class="btn btn-primary" id="btnSend">Send Transaction</button>
+                            <div class="result" id="transferResult"></div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- TRANSACTIONS PAGE -->
+                <section class="page" data-page="transactions">
+                    <div class="chart-card" style="max-width:600px;">
+                        <div class="chart-header">
+                            <h3>Track Transaction</h3>
+                        </div>
+                        <div class="chart-body form-body">
+                            <label>Transaction ID
+                                <input type="text" id="txId" placeholder="uuid..."/>
+                            </label>
+                            <button class="btn btn-primary" id="btnCheckTx">Check Status</button>
+                            <div class="result" id="txResult"></div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- SETTINGS PAGE -->
+                <section class="page" data-page="settings">
+                    <div class="chart-card">
+                        <div class="chart-header">
+                            <h3>API Endpoint</h3>
+                        </div>
+                        <div class="chart-body form-body">
+                            <label>Backend URL
+                                <input type="text" id="apiBase" placeholder="http://localhost:3000"/>
+                            </label>
+                            <button class="btn btn-primary" id="btnSaveApi">Save</button>
+                            <p class="hint">Saved locally in your browser. Default: <code>http://localhost:3000</code></p>
+                        </div>
+                    </div>
+                </section>
+            </div>
+        </main>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>
